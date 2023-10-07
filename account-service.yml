@@ -21,4 +21,4 @@ server:
   error:
     include-message: always
 api:
-  auth: http://AUTH-SERVICE/api/user
+  auth: http://AUTH-SERVICE/api/authenticate/user
