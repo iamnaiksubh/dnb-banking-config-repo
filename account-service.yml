@@ -1,10 +1,8 @@
 spring:
-  application:
-      name: account-service
   datasource:
       username: root
       password: root
-      url: jdbc:mysql://localhost:3306/useraccountdb
+      url: jdbc:mysql://${DB_HOST:localhost}:3306/bankingpauthdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
   jpa:
       hibernate:
         ddl-auto: update
@@ -15,12 +13,17 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
-  eureka:
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} 
+  application:
+    name: ACCOUNT-SERVICE
 server:
   port: 0
   error:
     include-message: always
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 api:
   auth: http://AUTH-SERVICE/api/authenticate/user
